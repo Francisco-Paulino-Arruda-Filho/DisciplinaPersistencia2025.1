@@ -6,6 +6,11 @@ def filtrar_produtos_baixo_estoque():
 
 print(filtrar_produtos_baixo_estoque())
 
+estoque = pd.read_csv('estoque.csv', sep=',')
+
+estoque_abaixo_10 = estoque[estoque['Quantidade'] < 10]
+print(estoque_abaixo_10[['Produto', 'Quantidade']])
+
         
 '''
 import pandas as pd
