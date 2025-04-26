@@ -1,0 +1,4 @@
+nome = "Lucas"
+idade = 27
+notas = [ 8.0, 7.5, 9.0,]
+aprovado = true

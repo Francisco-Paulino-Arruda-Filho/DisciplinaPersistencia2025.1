@@ -1,8 +1,9 @@
+# Questão 02
+
 from PIL import Image
 from pytesseract import pytesseract
 from bs4 import BeautifulSoup
 import requests
-import pandas as pd
 
 response = requests.get("https://www.iana.org/help/example-domains")
 doc = BeautifulSoup(response.text, "html.parser")
