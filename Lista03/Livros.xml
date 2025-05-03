@@ -1,0 +1,157 @@
+<?xml version="1.0" ?>
+<livros>
+  <livro>
+    <id>0</id>
+    <titulo>Harry Potter e a Pedra Filosofal</titulo>
+    <autor>J.K. Rowling</autor>
+    <ano>1997</ano>
+    <genero>Fantasia</genero>
+  </livro>
+  <livro>
+    <id>1</id>
+    <titulo>Harry Potter e a Câmara Secreta</titulo>
+    <autor>J.K. Rowling</autor>
+    <ano>1998</ano>
+    <genero>Fantasia</genero>
+  </livro>
+  <livro>
+    <id>2</id>
+    <titulo>Harry Potter e o Prisioneiro de Azkaban</titulo>
+    <autor>J.K. Rowling</autor>
+    <ano>1999</ano>
+    <genero>Fantasia</genero>
+  </livro>
+  <livro>
+    <id>3</id>
+    <titulo>Harry Potter e o Cálice de Fogo</titulo>
+    <autor>J.K. Rowling</autor>
+    <ano>2000</ano>
+    <genero>Fantasia</genero>
+  </livro>
+  <livro>
+    <id>4</id>
+    <titulo>Harry Potter e a Ordem da Fênix</titulo>
+    <autor>J.K. Rowling</autor>
+    <ano>2003</ano>
+    <genero>Fantasia</genero>
+  </livro>
+  <livro>
+    <id>5</id>
+    <titulo>Harry Potter e o Enigma do Príncipe</titulo>
+    <autor>J.K. Rowling</autor>
+    <ano>2005</ano>
+    <genero>Fantasia</genero>
+  </livro>
+  <livro>
+    <id>6</id>
+    <titulo>Harry Potter e as Relíquias da Morte</titulo>
+    <autor>J.K. Rowling</autor>
+    <ano>2007</ano>
+    <genero>Fantasia</genero>
+  </livro>
+  <livro>
+    <id>7</id>
+    <titulo>A Sociedade do Anel</titulo>
+    <autor>J.R.R. Tolkien</autor>
+    <ano>1954</ano>
+    <genero>Fantasia</genero>
+  </livro>
+  <livro>
+    <id>8</id>
+    <titulo>As Duas Torres</titulo>
+    <autor>J.R.R. Tolkien</autor>
+    <ano>1954</ano>
+    <genero>Fantasia</genero>
+  </livro>
+  <livro>
+    <id>9</id>
+    <titulo>O Retorno do Rei</titulo>
+    <autor>J.R.R. Tolkien</autor>
+    <ano>1955</ano>
+    <genero>Fantasia</genero>
+  </livro>
+  <livro>
+    <id>10</id>
+    <titulo>O Sobrinho do Mago</titulo>
+    <autor>C.S. Lewis</autor>
+    <ano>1955</ano>
+    <genero>Fantasia</genero>
+  </livro>
+  <livro>
+    <id>11</id>
+    <titulo>O Leão, a Feiticeira e o Guarda-Roupa</titulo>
+    <autor>C.S. Lewis</autor>
+    <ano>1950</ano>
+    <genero>Fantasia</genero>
+  </livro>
+  <livro>
+    <id>12</id>
+    <titulo>O Cavalo e seu Menino</titulo>
+    <autor>C.S. Lewis</autor>
+    <ano>1954</ano>
+    <genero>Fantasia</genero>
+  </livro>
+  <livro>
+    <id>13</id>
+    <titulo>Príncipe Caspian</titulo>
+    <autor>C.S. Lewis</autor>
+    <ano>1951</ano>
+    <genero>Fantasia</genero>
+  </livro>
+  <livro>
+    <id>14</id>
+    <titulo>A Viagem do Peregrino da Alvorada</titulo>
+    <autor>C.S. Lewis</autor>
+    <ano>1952</ano>
+    <genero>Fantasia</genero>
+  </livro>
+  <livro>
+    <id>15</id>
+    <titulo>A Cadeira de Prata</titulo>
+    <autor>C.S. Lewis</autor>
+    <ano>1953</ano>
+    <genero>Fantasia</genero>
+  </livro>
+  <livro>
+    <id>16</id>
+    <titulo>A Última Batalha</titulo>
+    <autor>C.S. Lewis</autor>
+    <ano>1956</ano>
+    <genero>Fantasia</genero>
+  </livro>
+  <livro>
+    <id>17</id>
+    <titulo>O Ladrão de Raios</titulo>
+    <autor>Rick Riordan</autor>
+    <ano>2005</ano>
+    <genero>Fantasia</genero>
+  </livro>
+  <livro>
+    <id>18</id>
+    <titulo>O Mar de Monstros</titulo>
+    <autor>Rick Riordan</autor>
+    <ano>2006</ano>
+    <genero>Fantasia</genero>
+  </livro>
+  <livro>
+    <id>19</id>
+    <titulo>A Maldição do Titã</titulo>
+    <autor>Rick Riordan</autor>
+    <ano>2007</ano>
+    <genero>Fantasia</genero>
+  </livro>
+  <livro>
+    <id>20</id>
+    <titulo>A Batalha do Labirinto</titulo>
+    <autor>Rick Riordan</autor>
+    <ano>2008</ano>
+    <genero>Fantasia</genero>
+  </livro>
+  <livro>
+    <id>21</id>
+    <titulo>O Último Olimpiano</titulo>
+    <autor>Rick Riordan</autor>
+    <ano>2009</ano>
+    <genero>Fantasia</genero>
+  </livro>
+</livros>

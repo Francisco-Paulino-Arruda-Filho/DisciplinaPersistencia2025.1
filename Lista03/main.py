@@ -4,6 +4,7 @@ from fastapi import FastAPI, HTTPException
 import os
 import xml.etree.ElementTree as ET
 from pydantic import BaseModel
+import xml.dom.minidom as minidom
 
 app = FastAPI()
 XML_FILE = 'Livros.xml'
@@ -19,19 +20,21 @@ class Livro(BaseModel):
 def ler_dados_xml() -> List[Livro]:
     livros = []
     if os.path.exists(XML_FILE):
-        tree = ET.parse(XML_FILE)
-        root = tree.getroot()
-        for elem in root.findall("livro"):
-            livro = Livro(
-                id=int(elem.find("id").text),
-                titulo=elem.find("titulo").text,
-                autor=elem.find("autor").text,
-                ano=int(elem.find("ano").text),
-                genero=elem.find("genero").text
-            )
-            livros.append(livro)
+        try:
+            tree = ET.parse(XML_FILE)
+            root = tree.getroot()
+            for elem in root.findall("livro"):
+                livro = Livro(
+                    id=int(elem.find("id").text),
+                    titulo=elem.find("titulo").text,
+                    autor=elem.find("autor").text,
+                    ano=int(elem.find("ano").text),
+                    genero=elem.find("genero").text
+                )
+                livros.append(livro)
+        except ET.ParseError:
+            pass
     return livros
-
 
 def escrever_dados_xml(livros: List[Livro]):
     root = ET.Element("livros")
@@ -42,8 +45,16 @@ def escrever_dados_xml(livros: List[Livro]):
         ET.SubElement(livro_elem, "autor").text = livro.autor
         ET.SubElement(livro_elem, "ano").text = str(livro.ano)
         ET.SubElement(livro_elem, "genero").text = livro.genero
+
     tree = ET.ElementTree(root)
-    tree.write(XML_FILE, encoding='utf-8', xml_declaration=True)
+
+    xml_str = ET.tostring(root, encoding='utf-8')
+
+    parsed = minidom.parseString(xml_str)
+    pretty_xml_as_string = parsed.toprettyxml(indent="  ")
+
+    with open(XML_FILE, "w", encoding="utf-8") as f:
+        f.write(pretty_xml_as_string)
 
 
 @app.post("/livros", response_model=Livro)
@@ -90,3 +101,8 @@ def deletar_livro(livro_id: int):
             escrever_dados_xml(livros)
             return livro_deletado
     raise HTTPException(status_code=HTTPStatus.NOT_FOUND, detail="Livro não encontrado.")
+
+@app.post("/colecao_livros", response_model=List[Livro])
+def criar_colecao_livros(livros: List[Livro]):
+    for livro in livros:
+        criar_livro(livro)
