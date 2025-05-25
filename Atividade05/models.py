@@ -1,6 +1,5 @@
-from __future__ import annotations
-from sqlmodel import SQLModel, Field, Relationship
 from typing import List, Optional
+from sqlmodel import SQLModel, Field, Relationship
 
 
 class Equipe(SQLModel, table=True):
@@ -8,8 +7,8 @@ class Equipe(SQLModel, table=True):
     name: str
     descricao: Optional[str] = None
 
-    membros: List[Membro] = Relationship(back_populates="equipe")
-    projetos: List[Projeto] = Relationship(back_populates="equipe")
+    membros: List["Membro"] = Relationship(back_populates="equipe")
+    projetos: List["Projeto"] = Relationship(back_populates="equipe")
 
 
 class Membro(SQLModel, table=True):
@@ -17,8 +16,8 @@ class Membro(SQLModel, table=True):
     nome: str
     equipe_id: int = Field(foreign_key="equipe.id")
 
-    equipe: Optional[Equipe] = Relationship(back_populates="membros")
-    memberships: List[Membership] = Relationship(back_populates="membro")
+    equipe: Optional["Equipe"] = Relationship(back_populates="membros")
+    memberships: List["Membership"] = Relationship(back_populates="membro")
 
 
 class Projeto(SQLModel, table=True):
@@ -27,9 +26,9 @@ class Projeto(SQLModel, table=True):
     descricao: Optional[str] = None
     equipe_id: int = Field(foreign_key="equipe.id")
 
-    equipe: Optional[Equipe] = Relationship(back_populates="projetos")
-    tarefas: List[Tarefa] = Relationship(back_populates="projeto")
-    memberships: List[Membership] = Relationship(back_populates="projeto")
+    equipe: Optional["Equipe"] = Relationship(back_populates="projetos")
+    tarefas: List["Tarefa"] = Relationship(back_populates="projeto")
+    memberships: List["Membership"] = Relationship(back_populates="projeto")
 
 
 class Tarefa(SQLModel, table=True):
@@ -37,7 +36,7 @@ class Tarefa(SQLModel, table=True):
     descricao: Optional[str] = None
     projeto_id: int = Field(foreign_key="projeto.id")
 
-    projeto: Optional[Projeto] = Relationship(back_populates="tarefas")
+    projeto: Optional["Projeto"] = Relationship(back_populates="tarefas")
 
 
 class Membership(SQLModel, table=True):
@@ -45,5 +44,5 @@ class Membership(SQLModel, table=True):
     membro_id: int = Field(foreign_key="membro.id")
     projeto_id: int = Field(foreign_key="projeto.id")
 
-    membro: Optional[Membro] = Relationship(back_populates="memberships")
-    projeto: Optional[Projeto] = Relationship(back_populates="memberships")
+    membro: Optional["Membro"] = Relationship(back_populates="memberships")
+    projeto: Optional["Projeto"] = Relationship(back_populates="memberships")
