@@ -1,8 +1,8 @@
 from bson import ObjectId
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, HTTPException
 from database import alunos_collection, cursos_collection
 from models import AlunoCreate, AlunoOut
-from typing import List, Optional
+from typing import List
 from bson.errors import InvalidId
 
 router = APIRouter()

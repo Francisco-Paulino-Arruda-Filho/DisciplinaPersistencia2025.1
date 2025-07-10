@@ -6,14 +6,8 @@
 
 
 from fastapi import APIRouter, HTTPException
-from database import alunos_collection, cursos_collection, turmas_collection, departamentos_collection, professores_collection
+from database import alunos_collection, cursos_collection, turmas_collection, departamentos_collection, professores_collection, matriculas_collection
 from bson import ObjectId
-from fastapi import APIRouter, HTTPException
-from database import turmas_collection, cursos_collection
-from models import TurmaCreate, TurmaOut
-from bson import ObjectId
-from typing import List
-
 
 router = APIRouter(prefix="/avancadas")
 
@@ -102,3 +96,81 @@ def fix_objectid(doc):
                 out[k] = fix_objectid(v)
         return out
     return doc
+
+@router.get("/alunos/{aluno_id}/matriculas-detalhadas")
+async def listar_matriculas_detalhadas(aluno_id: str):
+    try:
+        aluno_obj_id = ObjectId(aluno_id)
+    except Exception:
+        raise HTTPException(status_code=400, detail="ID de aluno inválido")
+
+    aluno = await alunos_collection.find_one({"_id": aluno_obj_id})
+    if not aluno:
+        raise HTTPException(status_code=404, detail="Aluno não encontrado")
+
+    aluno = fix_objectid(aluno)
+
+    matriculas = await matriculas_collection.find({"aluno_id": aluno_id}).to_list(length=None)
+    resultado = []
+
+    for matricula in matriculas:
+        turma = await turmas_collection.find_one({"_id": ObjectId(matricula["turma_id"])})
+        turma = fix_objectid(turma) if turma else None
+
+        curso = None
+        if turma:
+            curso = await cursos_collection.find_one({"_id": ObjectId(turma["curso_id"])})
+            curso = fix_objectid(curso) if curso else None
+
+        resultado.append({
+            "matricula_id": str(matricula["_id"]),
+            "turma": turma,
+            "curso": curso
+        })
+
+    return {
+        "aluno": aluno,
+        "matriculas": resultado
+    }
+
+@router.get("/cursos-com-total-alunos")
+async def cursos_com_total_alunos():
+    cursos = await cursos_collection.find().to_list(length=None)
+    cursos = fix_objectid(cursos)
+
+    resultado = []
+    for curso in cursos:
+        total = await alunos_collection.count_documents({"curso_id": str(curso["_id"])})
+        resultado.append({
+            "curso": curso,
+            "total_alunos": total
+        })
+
+    return resultado
+
+@router.get("/professores-com-cursos-e-turmas")
+async def professores_com_detalhes():
+    professores = await professores_collection.find().to_list(length=None)
+    professores = fix_objectid(professores)
+
+    resultado = []
+
+    for prof in professores:
+        cursos = await cursos_collection.find({"professor_id": str(prof["_id"])}).to_list(length=None)
+        cursos = fix_objectid(cursos)
+
+        cursos_com_turmas = []
+        for curso in cursos:
+            turmas = await turmas_collection.find({"curso_id": str(curso["_id"])}).to_list(length=None)
+            turmas = fix_objectid(turmas)
+            cursos_com_turmas.append({
+                "curso": curso,
+                "turmas": turmas
+            })
+
+        resultado.append({
+            "professor": prof,
+            "cursos_e_turmas": cursos_com_turmas
+        })
+
+    return resultado
